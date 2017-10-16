@@ -1,4 +1,4 @@
-[Markdown syntax][1]
+[Markdown syntax](https://help.github.com/articles/basic-writing-and-formatting-syntax/)
 
 > - Title & Description: one or two sentences, but be sure to capture the spirit of your project clearly and concisely
 >
@@ -20,19 +20,11 @@
 >
 > - shields
 >
-> - License: [how to choose liscence][2]
+> - License: [how to choose a liscence for your project](https://choosealicense.com/)
 >
 > - Frequent asked questions
 >
 > - Contents of table
-
-
-
----
-
-[1]https://help.github.com/articles/basic-writing-and-formatting-syntax/
-
-[2]https://choosealicense.com/
 
 
 
