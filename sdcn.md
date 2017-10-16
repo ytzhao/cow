@@ -1,6 +1,6 @@
 # Week 1: Welcome 
 
-1. [DARPA Grand Challenge and Stanley][1]
+1. [DARPA Grand Challenge and Stanley](https://classroom.udacity.com/nanodegrees/nd013/parts/fbf77062-5703-404e-b60c-95b78b2f3f9e/modules/83ec35ee-1e02-48a5-bdb7-d244bd47c2dc/lessons/facdff19-61a5-47e4-8179-a6a5dc28987f/concepts/70763f5c-a090-454f-aef9-8e05c16d2db5)
 2. There're 2 distinct approaches to autonomous development:
 
 >- A **robotics** approach: fuses output from a suite of sensors to directly measure the vehicle surroundings and then navigate accordingly  
@@ -36,7 +36,7 @@
 
 # Week 2: Finding Lane Lines on the Road
 
-**1. what is the problem? -> 2. color selection -> 3. region masking -> 4. canny edge detection -> 5. hough transform -> 6. project 1**
+**[ x ] 1. what is the problem? -> [ x ] 2. color selection -> [  ] 3. region masking -> [  ] 4. canny edge detection -> [  ] 5. hough transform -> [  ] 6. project 1**
 
 ## 1. What is the problem?
 
@@ -65,9 +65,3 @@ in this case, we could assume that the camera that took the image is mounted in 
 ## 5. Hough transform
 
 ## 6. Project 1
-
-
-
----
-
-[1]https://classroom.udacity.com/nanodegrees/nd013/parts/fbf77062-5703-404e-b60c-95b78b2f3f9e/modules/83ec35ee-1e02-48a5-bdb7-d244bd47c2dc/lessons/facdff19-61a5-47e4-8179-a6a5dc28987f/concepts/70763f5c-a090-454f-aef9-8e05c16d2db5
