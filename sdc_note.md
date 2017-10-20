@@ -1,8 +1,10 @@
 ---
 title: notes for sdcnd
-date: 2017-10-20 01:18:50
+created: 2017-10-17 
+modified: 2017-10-20 01:18:50
 categories: notes
 tags: [notes, cv]
+description: this is just a study note of udacity sdcnd program
 author: yuting zhao
 ---
 
