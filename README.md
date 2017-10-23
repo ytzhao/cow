@@ -17,4 +17,14 @@
 - Contents of table
 
 
+---
 
+10-23 ~ 10-29:
+
+1. sdc: L3,4,5,6, P1
+2. robo2x: L2,3,4, P1
+3. mlnd: L1,2,3,4, P1
+4. Lin: W1
+5. ng ml: done
+6. parallel: L1,2,3
+7. GitHub: done
