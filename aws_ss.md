@@ -1,0 +1,6 @@
+[使用亚马逊AWS搭建免费的Shadowsocks服务器](http://celerysoft.github.io/2016-01-15.html)
+[shadowsocks-qt5 使用手册](https://github.com/shadowsocks/shadowsocks-qt5/wiki/%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C#%E8%BF%9E%E6%8E%A5)
+[Ubuntu下shadowsocks配置说明](http://www.linuxidc.com/Linux/2015-09/123579.htm)
+[通过UBUNTU 16.04去设置SS SERVER](http://www.cnblogs.com/sunchao1984/p/5940332.html)
+[Ubuntu server命令行配置shadowsocks全局代理](http://blog.csdn.net/hanshileiai/article/details/53899612)
+[Linux(CentOS and Ubuntu)安装Shadowsocks服务端server教程](http://blog.csdn.net/yjb7268888/article/details/54574528)
