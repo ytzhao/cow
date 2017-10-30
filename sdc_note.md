@@ -34,8 +34,6 @@ author: yuting zhao
      - Project 7: Path planning
      - Project 8: Put your code in a real self-driving car!  
 
-     ​
-
 ------
 
 # Week 2: Finding Lane Lines on the Road
@@ -137,3 +135,24 @@ lines = cv2.HoughLinesP(edges, rho, theta, threshold, np.array([]), min_line_len
    Go to **[http://localhost:8888](http://localhost:8888)** in your browser
 
 3. [ … ] Code Review
+
+------
+
+# Week 4: Introduction to Neural Networks
+## 14. Gradient Descent
+### 1. Learning weights
+Learn the weights from example data, then use those weights to make the predictions. We want to make predictions as close as possible to the real values. Therefore, we need a metric of how wrong the predictions are, the **error**. A common metric is the sum of the squared errors(SSE):
+$$ E=1/2 * \sum_{u} \sum_j[]^2$$
+
+This gives the overall error for all the output predictions for all the data points.
+
+And the output of a neural network, the prediction, depends on the weights:
+$$$$
+
+and accordingly the error depends on the weights:
+$$$$
+
+**Our goal is to find weights $$w_{ij}$$** that minimize the squared error $$E$$.
+
+## Caveat
+The weights end up where the error is low, but not the **lowest**. This spots are called **local minima**. To avoid this, there\'re some methods, such as [momentum](http://ruder.io/optimizing-gradient-descent/index.html#momentum).
