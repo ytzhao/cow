@@ -34,8 +34,6 @@ author: yuting zhao
      - Project 7: Path planning
      - Project 8: Put your code in a real self-driving car!  
 
-     ​
-
 ------
 
 # Week 2: Finding Lane Lines on the Road
@@ -137,3 +135,39 @@ lines = cv2.HoughLinesP(edges, rho, theta, threshold, np.array([]), min_line_len
    Go to **[http://localhost:8888](http://localhost:8888)** in your browser
 
 3. [ … ] Code Review
+
+------
+
+# Week 4: Introduction to Neural Networks
+## 14. [Gradient Descent](https://classroom.udacity.com/nanodegrees/nd013/parts/fbf77062-5703-404e-b60c-95b78b2f3f9e/modules/6df7ae49-c61c-4bb2-a23e-6527e69209ec/lessons/83a4e710-a69e-4ce9-9af9-939307c0711b/concepts/f9fc4073-7808-4018-a2e9-aa17cf239a0d)
+### 1. Learning weights
+Learn the weights from example data, then use those weights to make the predictions. We want to make predictions as close as possible to the real values. Therefore, we need a metric of how wrong the predictions are, the **error**. A common metric is the sum of the squared errors(SSE):
+$$ E=1/2 * \sum_{u} \sum_j[]^2$$
+
+This gives the overall error for all the output predictions for all the data points.
+
+And the output of a neural network, the prediction, depends on the weights:
+$$$$
+
+and accordingly the error depends on the weights:
+$$$$
+
+**Our goal is to find weights $$w_{ij}$$** that minimize the squared error $$E$$.
+
+### 2. Caveat
+The weights end up where the error is low, but not the **lowest**. This spots are called **local minima**. To avoid this, there\'re some methods, such as [momentum](http://ruder.io/optimizing-gradient-descent/index.html#momentum).
+
+### 3. Mean Square Error
+$$E = 1/2 * sum_{u}(y^u - y^u)^2$$
+
+The general algorithm for updating the weights with gradient descent:
+- Set the weight step to zero: $$ delW_{i} = 0$$
+- For each record in the training data:
+  - Make a forward pass through the network, calculating the output $$$$
+  - Calculate the error gradient in the output unit, $$$$
+  - Update the weight step $$$$
+- Update the weights $$$$ where $$$$ is the learning rate and $$m$$ is the number of records. Here we're averaging the weight steps to help reduce any large variations in the training data
+- Repeat for $$e$$ epochs
+
+### 4. Backpropagation
+We come to the problem of how to make a multilayer neural network *learn*. To update the weights to hidden layers using gradient descent, **we need to know how much error each of the hidden units contributed to the final output**. Since the output of a layer is determined by the weights between layers, the error resulting from units is scaled by the weights going forward through the network. **Since we know the error at the output, we can use the weights to work backwards to hidden layers**.
