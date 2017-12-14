@@ -91,3 +91,17 @@ cd /usr/local/bin/
 
 ### 6. :tada: :tada: :tada:
 
+
+### Q & A:
+1. terminate called after throwing an instance of 'rs2::backend_error'
+  what():  libusb_open(...) returned LIBUSB_ERROR_ACCESS Last Error: Permission denied
+- Try re-installing udev rules located in librealsense source directory:   
+```shell
+sudo cp config/99-realsense-libusb.rules /etc/udev/rules.d/   
+sudo udevadm control --reload-rules && udevadm trigger  
+```
+
+If the issue persists, the cause might be due to the fact that your user is not part of the plugdev group.
+```shell
+sudo adduser "moro" plugdev 
+```
