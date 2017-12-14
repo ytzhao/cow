@@ -1,5 +1,6 @@
 [librealsense github](https://github.com/IntelRealSense/librealsense/blob/development/doc/installation.md)  
-[Intel official sample code](https://github.com/IntelRealSense/librealsense/wiki/API-How-To#get-first-realsense-device)
+[Intel official sample code](https://github.com/IntelRealSense/librealsense/wiki/API-How-To#get-first-realsense-device)  
+[Intel developer zone](https://software.intel.com/en-us/articles/using-librealsense-and-opencv-to-stream-rgb-and-depth-data)  
 
 ### 1. Enable 'Secure Boot' 
 
