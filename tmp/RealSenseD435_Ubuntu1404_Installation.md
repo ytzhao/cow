@@ -1,3 +1,12 @@
+# Requirement
+| Required Info |  |
+| --- | --- |
+| Camera Model | D415 & D435 |
+| Operation System & Version | Ubuntu 14.04 + |
+| Kernel Version | 4.4.0-101-generic |
+| SDK Version | rs2 |
+
+# Installation
 [librealsense github](https://github.com/IntelRealSense/librealsense/blob/development/doc/installation.md)  
 [Intel official sample code](https://github.com/IntelRealSense/librealsense/wiki/API-How-To#get-first-realsense-device)  
 [Intel developer zone](https://software.intel.com/en-us/articles/using-librealsense-and-opencv-to-stream-rgb-and-depth-data)  
@@ -90,9 +99,6 @@ cd /usr/local/bin/
 ./realsense-viewer
 ```
 
-### 6. :tada: :tada: :tada:
-
-
 ### Q & A:
 1. terminate called after throwing an instance of 'rs2::backend_error'
   what():  libusb_open(...) returned LIBUSB_ERROR_ACCESS Last Error: Permission denied
@@ -106,3 +112,18 @@ If the issue persists, the cause might be due to the fact that your user is not 
 ```shell
 sudo adduser "moro" plugdev 
 ```
+
+# Comparision between D415 & D435
+| RealSense | D415 | D435 |
+| --------- | --------- | --------- |
+| Serial NO. | 739112060064 | 728612070754 |
+| Firmware Version | 05.08.15.00 | 05.08.14.00 |
+| --------- | Color intrinsices | --------- |
+| fx | 613.298 | 618.638 |
+| ppx | 321.863 | 319.006 |
+| fy | 611.59 | 618.691 |
+| ppy | 234.936 | 251.402 |
+| coeff(?) | 0 0 0 0 0 | 0 0 0 0 0 |
+| --------- | Field of View | --------- |
+| Color | x: 55.1078, y: 42.8501 | x: 54.7019, y: 42.3917|
+| Depth | x: 53.7063, y: 41.5863 | x: 79.3763, y: 63.7966 |
