@@ -1,8 +1,8 @@
-> Get your feet wet.
-> Be criticle of your own code.
-> Go profile, understand why it perform does the ways it.
-> Understand your memory is not flat.
-> Understand the hierarchy of the memory system and find a compilling application.
+> Get your feet wet.   
+> Be criticle of your own code.   
+> Go profile, understand why it perform does the ways it.   
+> Understand your memory is not flat.   
+> Understand the hierarchy of the memory system and find a compilling application.   
 
 
 [Markdown syntax](https://help.github.com/articles/basic-writing-and-formatting-syntax/)
