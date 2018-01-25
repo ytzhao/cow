@@ -22,3 +22,10 @@
 7. License: [how to choose a liscence for your project](https://choosealicense.com/)
 8. Frequent asked questions
 9. Contents of table
+
+Code commit message prefix follow style from [3D Slicer](https://www.slicer.org/).
+- BUG: a change made to fix a runtime issue (crash, segmentation fault, exception, or incorrect result;   
+- COMP: a fix for a compilation issue, error or warning;   
+- ENH: new functionality added to the project;   
+- PERF: a performance improvement;   
+- STYLE: a change that does not impact the logic or execution of the code. (improve coding style, comments, documentation).   
