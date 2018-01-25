@@ -144,13 +144,14 @@ void CAstraReader::GetResolution(eint &nWidth, eint &nHeight)
 
 void CAstraReader::GetImage(estring strLocation, estring strFileTitle)
 {
+    cout << "Astra camera starts get images" << endl;
     eint nCount = 0;
     if (m_bIsOpened){
         while (1) {
             cv::Mat matColor, matDepth;
             this->ReadFrame(matColor, matDepth);
             cv::imshow("color", matColor);
-            int nKey = cv::waitKey(1);
+            int nKey = cv::waitKey(10);
 
             if ( ('q'==nKey) || ('Q'==nKey) ) {
                 break;
@@ -158,8 +159,8 @@ void CAstraReader::GetImage(estring strLocation, estring strFileTitle)
 
             if( ('s'==nKey) || ('S'==nKey) ) {
                 nCount++;
-                imwrite( (strLocation + strFileTitle + to_string(nCount) + ".jpg"), matColor);
-                bitwise_not(matColor, matColor);
+                cv::imwrite( (strLocation + strFileTitle + to_string(nCount) + ".jpg"), matColor);
+//                bitwise_not(matColor, matColor);
                 cout << "Frame captured: " << nCount << endl;
             }
         }

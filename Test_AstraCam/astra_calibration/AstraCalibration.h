@@ -28,17 +28,16 @@ class CAstraCalibration
         CAstraCalibration();
         ~CAstraCalibration();
 
-        void  Initialize(eint nImageWidth, eint nImageHeight);
-        // ebool RunCalibration(cv::Mat matColor);
-        ebool RunCalibration(estring strFileName);
-        ebool IsCalibrated() { return m_bCalibrated; }
+        void    Initialize(eint nImageWidth, eint nImageHeight);
+        ebool   RunCalibration(estring strFileName, estring strCalibFile);
+        ebool   IsCalibrated() { return m_bCalibrated; }
 
         ebool   ReadParamFile(estring strFile, cv::Mat &CamMatrix, cv::Mat &DistCoeffs);
         edouble Evaluate(cv::Mat CamMatrix, cv::Mat DistCoeffs);
 
     private:
-        void  SaveFile(cv::Mat, cv::Mat);
-        void  InitMatrix(vector<cv::Point3f>*);
+        void    SaveFile(estring strCalibFile, cv::Mat CamMatrix, cv::Mat DistCoeffs);
+        void    InitMatrix(vector<cv::Point3f>*);
 
         ebool   m_bCalibrated=false;
         eint    m_nCalibratedImageNum=0;

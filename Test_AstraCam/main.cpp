@@ -4,7 +4,7 @@ using namespace std;
 #include <OpenNI.h>
 #include "opencv2/opencv.hpp"
 
-#include "../../../../EwayPublic/OS/publicdef.h"
+#include "../../../../../EwayPublic/OS/publicdef.h"
 #include "./astra_reader/AstraReader.h"
 #include "./astra_calibration/AstraCalibration.h"
 
@@ -13,41 +13,36 @@ int main(int argc, char *argv[])
    edouble  darryIntrinsicMat[9];
    eint     nImgWidth, nImgHeight;
 
-//   CAstraReader iCam;
-//   iCam.Initialize(0, darryIntrinsicMat);
-//   iCam.GetResolution(nImgWidth, nImgHeight);
+   /*
+    * Use Obec Astra camera to get image and stored in the path the user pointed
+    */
 
-//    cv::Mat matColor, matDepth;
-//     while (1) {
-//         iCam.ReadFrame(matColor, matDepth);
-//         cv::imshow("color", matColor);
-//         cv::waitKey(1);
-//         cv::imshow("depth", matDepth);
-//         cv::waitKey(1);
-//     }
+   /*
+    CAstraReader iCam;
+    iCam.Initialize(0, darryIntrinsicMat);
+    iCam.GetResolution(nImgWidth, nImgHeight);
 
+    cv::Mat matColor, matDepth;
     // complete path + "/"
-//    iCam.GetImage("/home/moro/Desktop/", "cb");
+    iCam.GetImage("/home/moro/Desktop/", "test");
+   */
 
 
-    // do Astra camera calibration
+    estring strChessBoardFile = "./chessboard/cb.txt";
+    estring strCalibFile      = "../../VisionElement/AstraCam/AstraIntrin.txt";
+    /*
+     * Do Obec Astra camera calibration
+     */
     CAstraCalibration iCalibrator;
     iCalibrator.Initialize(640, 480);
-    
-    // while( false==iCalibrator.IsCalibrated() ) {
-    //      iCam.ReadFrame(matColor, matDepth);
-    //      iCalibrator.RunCalibration(matColor);
-    // }
-    iCalibrator.RunCalibration("/home/moro/Desktop/cb.txt");
+    iCalibrator.RunCalibration(strChessBoardFile, strCalibFile);
 
-     estring strFile = "/home/moro/Desktop/AstraCam_Intrinsic_Param.txt";
-     cv::Mat CamMatrix, DistCoeffs;
-     iCalibrator.ReadParamFile(strFile, CamMatrix, DistCoeffs);
+    /*
+     * Read camera calibration parameter file
+     */
+    cv::Mat CamMatrix, DistCoeffs;
+    iCalibrator.ReadParamFile(strCalibFile, CamMatrix, DistCoeffs);
 
-    edouble err = iCalibrator.Evaluate(CamMatrix, DistCoeffs);
-    cout << "err: " << err << endl;
-
-
-    cout << "Test_AstraCame done" << endl;
+    cout << "====== AstraCam_Calib done. ======" << endl;
     return 0;
 }

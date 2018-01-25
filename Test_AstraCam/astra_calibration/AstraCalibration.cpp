@@ -7,7 +7,7 @@ using namespace std;
 
 CAstraCalibration::CAstraCalibration()
 {
-    // Init object point matrix
+    // init object point matrix
     m_pvObjectPoints = new vector<cv::Point3f>;
     InitMatrix(m_pvObjectPoints);
 }
@@ -23,17 +23,16 @@ void CAstraCalibration::Initialize(eint nImageWidth, eint nImageHeight)
     m_nImageHeight = nImageHeight;
 }
 
-
-// ebool CAstraCalibration::RunCalibration(cv::Mat matColor)
-ebool CAstraCalibration::RunCalibration(estring strFileName)
+ebool CAstraCalibration::RunCalibration(estring strFileName, estring strCalibFile)
 {
     ifstream fin;
     fin.open(strFileName.c_str());
     if ( !fin ) {
-        cout << "!!!!!! Run calibration can not open file" << endl;
+        cout << "!!!!!! Run calibration can not open file: " << strFileName << endl;
         return false;
     }
 
+    cout << "Run calibration open file: " << strFileName << endl;
     cv::Size patternSize(CHESS_BOARD_WIDTH, CHESS_BOARD_HEIGHT);
     vector<cv::Point2f> vCornersInImg;
 
@@ -46,7 +45,7 @@ ebool CAstraCalibration::RunCalibration(estring strFileName)
         }
 
         m_nCalibratedImageNum++;
-        estring strFile = "/home/moro/Desktop/chessboard/" + strJpg;
+        estring strFile = "./chessboard/" + strJpg;
         cout << strFile << endl;
 
         // get frame height and width
@@ -76,18 +75,19 @@ ebool CAstraCalibration::RunCalibration(estring strFileName)
             cv::imshow("Image calibrate", matColor);
             cv::waitKey(200);
         } else {
-            cout << "pattern found fail" << endl;
+            cout << "!!!!!! Pattern found fail." << endl;
             EASSERT(0);
         }
     }
 
-
-    // // 4. draw chessboard corners
-    // cv::drawChessboardCorners(matColor, patternSize, cv::Mat(vCornersInImg), bPatternFound);
-    // cv::imshow("Image calibrate", matColor);
-    // cv::waitKey(1);
+    /*
+    // 5. draw chessboard corners
+    cv::drawChessboardCorners(matColor, patternSize, cv::Mat(vCornersInImg), bPatternFound);
+    cv::imshow("Image calibrate", matColor);
+    cv::waitKey(1);
+    */
    
-    // 5. get enough samples for calibration
+    // 6. get enough samples for calibration
     if ( (!m_bCalibrated) && (0 != m_vImagePointsList.size()) ) {
         cv::Mat cameraMatrix;
         cv::Mat distCoeffs;
@@ -95,10 +95,10 @@ ebool CAstraCalibration::RunCalibration(estring strFileName)
         cv::calibrateCamera(m_vObjectPointsList, m_vImagePointsList, cv::Size(m_nImageWidth, m_nImageHeight),
                             cameraMatrix, distCoeffs, m_vMatrixR, m_vMatrixT);
 
-        SaveFile(cameraMatrix, distCoeffs);
+        SaveFile(strCalibFile, cameraMatrix, distCoeffs);
 
         m_bCalibrated = true;
-        cout << "Camera calibration done." << endl;
+        cout << "====== Camera calibration done. ======" << endl;
     }
 
     return m_bCalibrated;
@@ -118,11 +118,9 @@ void CAstraCalibration::InitMatrix(vector<cv::Point3f> *pvObjectPoints)
     }
 }
 
-void CAstraCalibration::SaveFile(cv::Mat CamMatrix, cv::Mat DistCoeffs)
+void CAstraCalibration::SaveFile(estring strCalibFile, cv::Mat CamMatrix, cv::Mat DistCoeffs)
 {
-    estring strFile = "/home/moro/Desktop/AstraCam_Intrinsic_Param.txt";
-    
-    FILE *CamFile = fopen(strFile.c_str(), "w+");
+    FILE *CamFile = fopen(strCalibFile.c_str(), "w+");
     fprintf(CamFile,"%.12f\n", CamMatrix.at<edouble>(0, 0));    // fx
     fprintf(CamFile,"%.12f\n", CamMatrix.at<edouble>(0, 2));    // cx
     fprintf(CamFile,"%.12f\n", CamMatrix.at<edouble>(1, 1));    // fy
@@ -151,27 +149,39 @@ ebool CAstraCalibration::ReadParamFile(estring strFile, cv::Mat &CamMatrix, cv::
         return false;
     }
 
-    cout << "read calibration file: " << strFile << endl;
+    cout << "Read calibration file: " << strFile << endl;
     eint nCount = 0;
     estring strTmp;
     while (fin.good()) {
         getline(fin, strTmp);
         nCount++;
         switch (nCount) {
-            case 1: { CamMatrix.at<edouble>(0,0)  = atof(strTmp.c_str()); break; }
-            case 2: { CamMatrix.at<edouble>(0,2)  = atof(strTmp.c_str()); break; }
-            case 3: { CamMatrix.at<edouble>(1,1)  = atof(strTmp.c_str()); break; }
-            case 4: { CamMatrix.at<edouble>(1,2)  = atof(strTmp.c_str()); break; }
+            case 1: { CamMatrix.at<edouble>(0,0)  = atof(strTmp.c_str()); break; }      // fx
+            case 2: { CamMatrix.at<edouble>(0,2)  = atof(strTmp.c_str()); break; }      // cx
+            case 3: { CamMatrix.at<edouble>(1,1)  = atof(strTmp.c_str()); break; }      // fy
+            case 4: { CamMatrix.at<edouble>(1,2)  = atof(strTmp.c_str()); break; }      // cy
 
-            case 5: { DistCoeffs.at<edouble>(0,0) = atof(strTmp.c_str()); break; }
-            case 6: { DistCoeffs.at<edouble>(1,0) = atof(strTmp.c_str()); break; }
-            case 7: { DistCoeffs.at<edouble>(2,0) = atof(strTmp.c_str()); break; }
-            case 8: { DistCoeffs.at<edouble>(3,0) = atof(strTmp.c_str()); break; }
-            case 9: { DistCoeffs.at<edouble>(4,0) = atof(strTmp.c_str()); break; }
+            case 5: { DistCoeffs.at<edouble>(0,0) = atof(strTmp.c_str()); break; }      // k1
+            case 6: { DistCoeffs.at<edouble>(1,0) = atof(strTmp.c_str()); break; }      // k2
+            case 7: { DistCoeffs.at<edouble>(2,0) = atof(strTmp.c_str()); break; }      // p1
+            case 8: { DistCoeffs.at<edouble>(3,0) = atof(strTmp.c_str()); break; }      // p2
+            case 9: { DistCoeffs.at<edouble>(4,0) = atof(strTmp.c_str()); break; }      // k3
         }
     }
 
     fin.close();
+
+    // print out
+    cout << "fx: " << CamMatrix.at<edouble>(0,0)  << endl;
+    cout << "cx: " << CamMatrix.at<edouble>(0,2)  << endl;
+    cout << "fy: " << CamMatrix.at<edouble>(1,1)  << endl;
+    cout << "cy: " << CamMatrix.at<edouble>(1,2)  << endl;
+    cout << "k1: " << DistCoeffs.at<edouble>(0,0) << endl;
+    cout << "k2: " << DistCoeffs.at<edouble>(1,0) << endl;
+    cout << "p1: " << DistCoeffs.at<edouble>(2,0) << endl;
+    cout << "p2: " << DistCoeffs.at<edouble>(3,0) << endl;
+    cout << "k3: " << DistCoeffs.at<edouble>(4,0) << endl;
+
     return true;
 }
 
@@ -179,7 +189,7 @@ ebool CAstraCalibration::ReadParamFile(estring strFile, cv::Mat &CamMatrix, cv::
 edouble CAstraCalibration::Evaluate(cv::Mat CamMatrix, cv::Mat DistCoeffs) 
 {
     edouble dTotalErr = 0.0;
-    edouble dErr = 0.0;
+    edouble dErr      = 0.0;
 
     cout << "Evaluate......" << endl;
     cout << "m_nCalibratedImageNum  : " << m_nCalibratedImageNum << endl;
@@ -190,7 +200,7 @@ edouble CAstraCalibration::Evaluate(cv::Mat CamMatrix, cv::Mat DistCoeffs)
     cout << "m_vMatrixT size: " << m_vMatrixT.size() << endl;
     EASSERT(m_vMatrixR.size());
 
-    for (eint i = 0; i != m_vImagePointsList.size(); i++)
+    for (eint i = 0; i < m_vImagePointsList.size(); i++)
     {
         // object points and image points of each image
         // size should be CHESS_BOARD_WIDTH*CHESS_BOARD_HEIGHT = 54
@@ -225,7 +235,7 @@ edouble CAstraCalibration::Evaluate(cv::Mat CamMatrix, cv::Mat DistCoeffs)
     }
 
     cout << "total error: " << dTotalErr/m_nCalibratedImageNum << " pixel" << endl;
-    cout << "====== Calibartion evaluation done ======" << endl;
+    cout << "====== Calibartion evaluation done. ======" << endl;
     return dTotalErr;
 }
 
