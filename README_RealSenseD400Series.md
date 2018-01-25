@@ -1,5 +1,6 @@
 # 系统要求
-Intel官方要求realsense v2.0需要在Ubuntu16.04的系统环境中运行，目前我们在Ubuntu14.04 4.4.0-101-generic中安装成功，正常运行。
+Intel官方要求realsense v2.0需要在Ubuntu16.04的系统环境中运行，目前我们在Ubuntu14.04 4.4.0-101-generic中安装成功，正常运行。   
+
 | Required Info |  |
 | --- | --- |
 | Camera Model | D415 & D435 |
